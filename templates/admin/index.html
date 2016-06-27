@@ -1,0 +1,30 @@
+{% extends 'admin/master.html' %}
+{% block body %}
+{{ super() }}
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            version: {{version}}
+            <hr>
+            <h4>Stock List:</h4>
+            <p style="font-weight: bold;">
+                US Stock:
+            {% for us_stock in us_stock_data%}
+            {{us_stock.name}},
+            {% endfor %}<br>
+                China Stock:
+            {% for cn_stock in cn_stock_data%}
+            {{cn_stock.name}}({{cn_stock.code}}),
+            {% endfor %}
+            </p>
+            <hr>
+            <h4>Profits: {% if "-" not in profits: %}<p style="display:inline; color:red; font-weight: bold;">
+                {% else %}<p style="display:inline; color:green; font-weight: bold;">{% endif %}
+                {{profits}}%</p></h4><hr>
+            Update by: {{date}}<br><br>
+            <a class="btn btn-primary" href="/"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
+        </div>
+    </div>
+</div>
+{% endblock body %}

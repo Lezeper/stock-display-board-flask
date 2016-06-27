@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+<body style="width: 90%; margin: auto">
+<form action="/add_to_dl_list" method="POST">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th width="20px">Download</th>
+                <th>Name</th>
+                <th>Size</th>
+                <th>Date</th>
+                <th>From</th>
+            </tr>
+        </thead>
+        <tbody>
+{% for file in files %}
+            <tr>
+                <td><input type="checkbox" name="download" value={{file.href}}></td>
+                <td>{{file.name}}</td>
+                <td>{{file.size}}</td>
+                <td>{{file.date}}</td>
+                <td>{{file.web.decode('utf-8')}}</td>
+            </tr>
+{% endfor %}
+        </tbody>
+    </table>
+    <button type="submit" name="submit" value="submit">Download</button>
+</form>
+
+</body>
+</html>

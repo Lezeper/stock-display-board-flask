@@ -1,0 +1,45 @@
+{% extends 'admin/master.html' %}
+{% block body %}
+
+<form action="/foo" method="POST"><br>
+    <h4>Server State: {{server_state}}</h4>
+    {% if server_state != 'Working' %}
+    <button type="submit" name="submit" value="Turn On">Turn On</button>
+    {% else %}
+    Launching timer:{{time_l}}
+    {% endif %}
+    <hr>
+    <h4>Stock Server State: {{stock_state}}</h4>
+    {% if stock_state == 'Alive' %}
+        <button type="submit" name="submit" value="Turn On Stock Server" disabled>Turn On</button>
+        <button type="submit" name="submit" value="Turn Off Stock Server">Turn Off</button>
+    {% endif %}
+    {% if stock_state == 'Dead' %}
+        <button type="submit" name="submit" value="Turn On Stock Server">Turn On</button>
+        <button type="submit" name="submit" value="Turn Off Stock Server" disabled>Turn Off</button>
+    {% endif %}
+    <hr>
+    <h4>LED Matrix: {{rp_state}}</h4>
+    {% if rp_state == 'Alive' %}
+        <button type="submit" name="submit" value="Turn On RP" disabled>Turn On RP</button>
+        <button type="submit" name="submit" value="Turn Off RP">Turn Off RP</button>
+    {% endif %}
+    {% if rp_state == 'Dead' %}
+        <button type="submit" name="submit" value="Turn On RP">Turn On RP</button>
+        <button type="submit" name="submit" value="Turn Off RP" disabled>Turn Off RP</button>
+    {% endif %}
+    <hr>
+    <h4>Download Server State: {{dl_state}}</h4>
+    {% if dl_state == 'Alive' %}
+        <button type="submit" name="submit" value="Turn On Download Server" disabled>Turn On</button>
+        <button type="submit" name="submit" value="Turn Off Download Server">Turn Off</button>
+    {% endif %}
+    {% if dl_state == 'Dead' %}
+        <button type="submit" name="submit" value="Turn On Download Server">Turn On</button>
+        <button type="submit" name="submit" value="Turn Off Download Server" disabled>Turn Off</button>
+    {% endif %}
+    <hr>
+
+</form>
+<br>
+{% endblock %}

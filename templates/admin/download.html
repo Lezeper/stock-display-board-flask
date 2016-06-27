@@ -1,0 +1,48 @@
+{% extends 'admin/master.html' %}
+{% block body %}
+
+<form action="/find_download" method="POST"><br>
+    {% if dl_state == 'Dead' or dl_state == 'download not connected' %}
+    <input type="text" name="keyword" disabled>
+    <button type="submit" name="submit" value="keyword" disabled>Find</button>
+    <br>
+    <h4>Download Server not connected!</h4>
+    {% else %}
+
+    <input type="text" name="keyword">
+    <button type="submit" name="submit" value="keyword">Find</button><br><br>
+    <input type="checkbox" value="tokyo" name="web" checked>東京図書館
+    <input type="checkbox" value="nyaa" name="web" checked>nyaa
+
+    <br>
+    <hr>
+    <h3>Download List:</h3>
+    <div>
+        <script>
+           function changeValue(v){
+             document.getElementById('torrent_id').value=v;
+            }
+        </script>
+
+        <input id="torrent_id" type="hidden" name="torrent_id">
+    {% for dl in dl_list %}
+    {{dl.name}}<br>
+    {{dl.state}}<br>
+    {{dl.size}}<br>
+    {{dl.progress}}<br><br>
+    {% if 'Paused' in dl.state %}
+        <button type="submit" name="submit" value="resume" onClick="changeValue('{{dl.fid[4:]}}')">Resume</button>
+        <button type="submit" name="submit" value="stop" disabled>Stop</button>
+        <button type="submit" name="submit" value="delete" onClick="changeValue('{{dl.fid[4:]}}')">Delete</button>
+    {% else %}
+        <button type="submit" name="submit" value="resume" disabled>Resume</button>
+        <button type="submit" name="submit" value="stop" onClick="changeValue('{{dl.fid[4:]}}')">Stop</button>
+        <button type="submit" name="submit" value="delete" onClick="changeValue('{{dl.fid[4:]}}')">Delete</button>
+    {% endif %}
+
+    <hr>
+    {% endfor %}
+    </div>
+    {% endif %}
+</form>
+{% endblock %}

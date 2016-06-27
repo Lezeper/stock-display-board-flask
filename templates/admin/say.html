@@ -1,0 +1,11 @@
+{% extends 'admin/master.html' %}
+{% block body %}
+
+The text will show on the Raspberry for 5s:<br>
+<form action="/say_something" method="POST"><br>
+    <input type="text" name="text">
+    <button type="submit" name="submit" value="send">Send</button>
+</form>
+<br>
+{% if send == True: %}<p>Send!</p> {% endif %}
+{% endblock %}
